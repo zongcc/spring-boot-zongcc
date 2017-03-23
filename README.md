@@ -1,5 +1,7 @@
 # spring-boot-zongcc
 
+# before install this project please modify (application.properties) redis config   
+
 # this project inclue
 
 #1 simple activemq(ºÚµ•activemq π”√)
