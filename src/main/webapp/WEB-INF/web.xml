@@ -1,0 +1,81 @@
+<!--
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <display-name>sohu-up-ads-web</display-name>
+
+    &lt;!&ndash;自定义ApplicationContext配置文件的路劲&ndash;&gt;
+    <context-param>
+        &lt;!&ndash;contextConfigLocation名字不可变&ndash;&gt;
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:/**/applicationContext*.xml</param-value>
+    </context-param>
+
+    &lt;!&ndash;自动装配ApplicationContext文件的配置信息，创建Web容器&ndash;&gt;
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    &lt;!&ndash;配置编码过滤器，设置应用编码&ndash;&gt;
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            &lt;!&ndash;forceEncoding用来设置是否理会 request.getCharacterEncoding()方法，设置为true则强制覆盖之前的编码格式。&ndash;&gt;
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    &lt;!&ndash;配置全局session参数供页面使用&ndash;&gt;
+    <filter>
+        <filter-name>sessionFilter</filter-name>
+        <filter-class>com.sohu.sales.up.ads.web.filter.SessionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>sessionFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    &lt;!&ndash;配置前置控制器DispatcherServlet&ndash;&gt;
+    &lt;!&ndash;拦截匹配的请求，把拦截下来的请求，依据相应的规则分发到目标Controller来处理&ndash;&gt;
+    <servlet>
+        <servlet-name>spring-mvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    &lt;!&ndash;配置页面请求的名称&ndash;&gt;
+    <servlet-mapping>
+        <servlet-name>spring-mvc</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    &lt;!&ndash;配置欢迎页面&ndash;&gt;
+    <welcome-file-list>
+        <welcome-file>/welcome.jsp</welcome-file>
+    </welcome-file-list>
+
+    &lt;!&ndash; 404错误页面&ndash;&gt;
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
+    &lt;!&ndash;500错误页面&ndash;&gt;
+    <error-page>
+        <error-code>500</error-code>
+        <location>/500.jsp</location>
+    </error-page>
+</web-app>
+-->
