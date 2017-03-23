@@ -1,6 +1,10 @@
 # spring-boot-zongcc
 
-# before install this project please modify (application.properties) redis config   
+# before install this project please modify (application.properties) config   
+
+#1 mysql config(配置mysql地址、用户名和密码)
+
+#2 redis config (配置redis使用地址、端口和密码)
 
 # this project inclue
 
