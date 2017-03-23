@@ -17,6 +17,10 @@ public class WelcomeController {
     @Value("${application.message:Hello World}")
     private String message = "hello world";
 
+    /**
+     * 跳转页面直接使用application调用不起作用，必须使用spring-boot插件
+     * @return
+     */
     @RequestMapping("/")
     public ModelAndView welcome() {
         ModelAndView mvc = new ModelAndView();
