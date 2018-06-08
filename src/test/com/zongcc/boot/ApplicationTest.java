@@ -20,6 +20,7 @@ public class ApplicationTest {
     @Test
     public void test() throws Exception {
         // 保存字符串
+        System.out.println("=================1111111111111========================");
         stringRedisTemplate.opsForValue().set("aaa", "111");
         Assert.assertEquals("111", stringRedisTemplate.opsForValue().get("aaa"));
     }

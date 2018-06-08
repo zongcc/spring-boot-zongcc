@@ -18,6 +18,9 @@ package com.zongcc.boot.repository;
 import com.zongcc.boot.entity.City;
 import com.zongcc.boot.entity.Hotel;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * @author Eduardo Macarron
@@ -25,6 +28,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CityMapper {
 
+	@Select("select * from city where id = #{id}")
 	City selectCityById(long id);
 
 }

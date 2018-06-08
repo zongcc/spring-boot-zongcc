@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface UserRepository {
 
@@ -14,4 +16,6 @@ public interface UserRepository {
     @Select("SELECT * FROM T_USER WHERE username = #{userName}")
     JdbcUser selectByName(Integer id);
 
+    @Select("SELECT * FROM T_USER")
+    List<JdbcUser> selectAll();
 }

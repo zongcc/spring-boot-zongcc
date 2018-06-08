@@ -24,7 +24,7 @@ import javax.jms.Queue;
 //@EnableAutoConfiguration(exclude = DataSourceAutoConfiguration.class)//禁用自动配置类
 //@ComponentScan
 @SpringBootApplication //注解等价于以默认属性使用	@Configuration，	@EnableAutoConfiguration和@ComponentScan
-//@ServletComponentScan //项目中如果需要使用java原生的servlet和filter，可以在类中使用注解实现，主要是配置Druid监控时需要用到
+@ServletComponentScan //项目中如果需要使用java原生的servlet和filter，可以在类中使用注解实现，主要是配置Druid监控时需要用到
 @EnableJms
 @EnableCaching
 @EnableScheduling

@@ -1,14 +1,17 @@
 package com.zongcc.boot.entity;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import java.io.Serializable;
 
 /**
  * Created by chunchengzong on 2017-01-06.
  */
-@Component
-@ConfigurationProperties(prefix = "user")
-public class User {
+//@Component
+//,locations = "classpath:config/app.properties"
+//@ConfigurationProperties(prefix = "user")
+////1.5以前版本可以使用locations，以后的话只能使用下边的属性
+//@PropertySource("classpath:config/app.properties")
+public class User implements Serializable {
+    private static final long serialVersionUID = -2412012366788773382L;
     private Integer id;
     private String userName;
 

@@ -17,6 +17,7 @@ package com.zongcc.boot.repository;
 
 import com.zongcc.boot.entity.Hotel;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * @author Eduardo Macarron
@@ -24,6 +25,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface HotelMapper {
 
+	@Select("select * from hotel where city = #{id}")
 	Hotel selectByCityId(int id);
 
 }
