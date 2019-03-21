@@ -1,8 +1,12 @@
 package com.zongcc.boot;
 
+import com.zongcc.boot.entity.KafkaMessage;
+import com.zongcc.boot.kafka.KafkaSender;
 import com.zongcc.boot.service.HelloWorldService;
 import org.apache.activemq.command.ActiveMQQueue;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,12 +14,18 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jms.annotation.EnableJms;
+import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.jms.Queue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by chunchengzong on 2017-01-06.
@@ -29,6 +39,7 @@ import javax.jms.Queue;
 @EnableCaching
 @EnableScheduling
 @EnableTransactionManagement
+@EnableKafka
 public class Application extends SpringBootServletInitializer implements CommandLineRunner{
 
     @Autowired
@@ -45,6 +56,24 @@ public class Application extends SpringBootServletInitializer implements Command
         System.out.println("Application=====start=====");
         System.out.println("Application=====run=====result=====> "+helloWorldService.getHelloMessage());
         System.out.println("Application=====end=====");
+
+        this.template.send("test", "foo1");
+        this.template.send("test", "foo2");
+        this.template.send("test", "foo3");
+        latch.await(60, TimeUnit.SECONDS);
+        logger.info("All received");
+    }
+
+    @Autowired
+    private KafkaTemplate<String, String> template;
+
+    private final CountDownLatch latch = new CountDownLatch(3);
+
+
+    @KafkaListener(topics = "test")
+    public void listen(ConsumerRecord<?, ?> cr) throws Exception {
+        logger.info(cr.toString());
+        latch.countDown();
     }
 
     @Override

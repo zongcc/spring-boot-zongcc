@@ -6,6 +6,7 @@ import com.zongcc.boot.entity.JdbcUser;
 import com.zongcc.boot.entity.User;
 import com.zongcc.boot.entity.Worker;
 import com.zongcc.boot.repository.UserRepository;
+import com.zongcc.boot.service.UserService;
 import com.zongcc.boot.utils.JacksonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,8 @@ public class UserController {
 
     @Resource
     private UserRepository userRepository;
+    @Resource
+    UserService userService;
 
     // 创建线程安全的Map
     static Map<Integer, User> users = Collections.synchronizedMap(new HashMap<Integer, User>());
@@ -139,7 +142,7 @@ public class UserController {
         ModelAndView mvc = new ModelAndView();
         mvc.setViewName("/index");
         PageHelper.startPage(page,size);
-        List<JdbcUser> userList = userRepository.selectAll();
+        List<JdbcUser> userList = userService.selectAll();
         mvc.addObject("userList", userList);
         logger.info("userController=========>thymeleaf====>page:{}", new Object[]{JacksonUtil.toJson(userList)});
         return mvc;

@@ -1,22 +1,28 @@
 package com.zongcc.boot;
 
 import com.zongcc.boot.entity.JdbcUser;
+import com.zongcc.boot.service.UserService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(Application.class)
+import java.util.List;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class ApplicationTest {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
     @Autowired
     private RedisTemplate<String, JdbcUser> jdbcUserRedisTemplate;
+    @Autowired
+    private UserService userService;
+
     @Test
     public void test() throws Exception {
         // 保存字符串
@@ -33,5 +39,12 @@ public class ApplicationTest {
         user.setUserName("超人");
         jdbcUserRedisTemplate.opsForValue().set(user.getUserName(), user);
         Assert.assertEquals(10, jdbcUserRedisTemplate.opsForValue().get("超人").getAge().longValue());
+    }
+
+    @Test
+    public void testSelectAll() {
+        List<JdbcUser> userList = userService.selectAll();
+        System.out.println("=====testSelectAll==========>" + userList.size());
+        Assert.assertEquals(6, userList.size());
     }
 }
